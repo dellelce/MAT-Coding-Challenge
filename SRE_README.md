@@ -7,18 +7,18 @@
 
 ## Introduction
 
-The purpose of this challenge is for you to demonstrate
-* Document how to run and test your deployment.
-* The development of a MQTT client that subscribes to telemetry, receives the data, and stores them in a data store.
+The purpose of this challenge is for you to demonstrate:
+* Ability to document (instructions) of how to run and test your deployment.
+* The development of a MQTT client that subscribes to telemetry, receives the data, and persists to a data store.
 * Configuration Management code (e.g. Puppet/Chef/Ansible) and/or Dockerfile(s) or equivalent code that deploys:
-  * a suitable storage medium (your data store)
-  * the MQTT data archiver you wrote in an appropriate language of your choice
+  * a suitable storage medium (your persistant store)
+  * the MQTT data archiver you create in an appropriate language of your choice
   * any additional service you think is appropriate for such a platform
 * A public cloud deployment plan
 
 Feel free to use any libraries, frameworks or dependencies you want in order to achieve the task.
 
-Please include instructions on how to build and run your code, any tests you've written and some text explaining what you did.
+Please include instructions on how to build and run your code, any tests you've written and some text explaining what you did (an overview).
 
 If you are already familiar with the underlying technologies we hope that it won't take you more than a couple of hours to get your application up and running.
 
