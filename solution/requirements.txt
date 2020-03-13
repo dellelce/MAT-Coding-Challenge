@@ -1,0 +1,5 @@
+awscli
+ansible
+certifi
+yapf
+flake8
