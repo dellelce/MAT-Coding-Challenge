@@ -1,0 +1,7 @@
+tmp
+bin
+.terraform
+*.tfstate
+*.tfstate.backup
+*.key
+*.pub
