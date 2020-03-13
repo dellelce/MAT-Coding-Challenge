@@ -5,3 +5,4 @@ bin
 *.tfstate.backup
 *.key
 *.pub
+mclaren-env
