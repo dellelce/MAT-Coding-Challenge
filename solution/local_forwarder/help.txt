@@ -1,0 +1,7 @@
+Targets defined here:
+
+help                This message
+build               Build container
+run                 Run container
+kill                Kill container
+all                 Build and run container
