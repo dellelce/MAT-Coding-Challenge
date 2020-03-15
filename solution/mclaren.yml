@@ -1,0 +1,75 @@
+version: "3.3"
+
+configs:
+        mysql:
+                file: ./config/mysql.cnf
+
+
+services:
+        # MQTT broker
+        broker:
+                image: toke/mosquitto
+                ports:
+                        - "1883:1883/tcp"
+
+        # GPS coords source
+        source_gps:
+                image: mclarenappliedtechnologies/recruitment.fanengagement.streamgenerator
+                env_file:
+                        - ./env/source_gps.env
+                        - ./env/mqtt.env
+                        - ./env/cars.env
+                ports:
+                        - "8081:8080/tcp"
+
+        # Write to websocket
+        mqtt_to_websocket:
+                #image: mclarenappliedtechnologies/recruitment.fanengagement.forwarder
+                # I had to wrap the original "forwarder" image because it appears it does not recover from the error:
+                #            java.net.UnknownHostException: broker
+                # even if it appears to be retrying.
+                # which can happen because of the lack of "depends_on" in Swarm.
+                image: local_forwarder
+                env_file:
+                        - ./env/mqtt.env
+                environment:
+                        - SLEEP_TIME=7
+                ports:
+                        - "8080:8080/tcp"
+
+        # Webapp
+        webapp:
+                #image: mclarenappliedtechnologies/recruitment.fanengagement.webapp
+                #using "beautified" image with "beautified" javascript and 127.0.0.1 replaced with titan6.dellelce.net
+                image: local_beauty
+                ports:
+                        - "8084:8084/tcp"
+
+        # my "aggregator"
+        aggry:
+                env_file:
+                        - ./env/cars.env
+                environment:
+                        - DEBUG=false
+                image: local_aggry
+
+        # reads from MQTT write to MySQL
+        storage:
+                env_file:
+                        - ./env/mqtt.env
+                        - ./env/db.env
+                environment:
+                        - DEBUG=false
+                image: local_storage
+
+        # my "MySQL" instance
+        mysql:
+                image: local_mysql
+                env_file:
+                        - ./env/mysql.env
+                        - ./env/db.env
+                configs:
+                        - source: mysql
+                          target: /etc/my.cnf.d/mclaren.cnf
+                volumes:
+                        - './local_mysql/data:/var/lib/mysql'

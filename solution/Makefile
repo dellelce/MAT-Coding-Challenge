@@ -62,3 +62,6 @@ ssh:
 
 test_client:
 	@. $(VENV)/bin/activate && aws sts get-caller-identity
+
+# include MacLaren specific targets
+include mclaren.mk
