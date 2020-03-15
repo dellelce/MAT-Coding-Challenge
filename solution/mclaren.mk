@@ -5,10 +5,6 @@ DCL         = mclaren.yml
 STACK       = mclaren
 
 
-.PHONY: help
-help:
-	@cat docs/makefile-help.txt
-
 .PHONY: build
 build:
 	for service in $(COMPONENTS); do make -C "$$service" build || break; done

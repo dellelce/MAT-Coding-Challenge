@@ -23,8 +23,6 @@ terrabin: bin/terraform
 bin/terraform:
 	@wget -q -O bin/terraform.zip $(TERRAURL) && cd bin && unzip -q terraform.zip && chmod +x terraform && rm terraform.zip
 
-all: terrabin init apply_force
-
 terraversion:
 	@$(TERRAFORM) version
 
