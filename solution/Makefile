@@ -1,4 +1,4 @@
-# MyTutor Test Makefile
+# McLaren Test Makefile
 
 VENV := mclaren-env
 TERRAFORM := $(PWD)/bin/terraform
